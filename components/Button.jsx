@@ -23,7 +23,6 @@ const Button = ({ text, href }) => {
 
 const styles = StyleSheet.create({
   button: {
-    flex: 1,
     width: width * 0.5,
     height: height * 0.15,
     borderRadius: 25,
