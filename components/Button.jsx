@@ -4,9 +4,14 @@ import { Pressable, View, StyleSheet, Text, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window"); // Get screen width
 
+import { useNavigation } from "@react-navigation/native";
+
 const Button = ({ text, href }) => {
+  const navigation = useNavigation();
+
   return (
     <Pressable
+      onPress={() => navigation.navigate("contact-form")}
       style={({ pressed }) => [
         styles.button,
         {
@@ -16,9 +21,7 @@ const Button = ({ text, href }) => {
         },
       ]}
     >
-      <Link style={styles.text} href={href}>
-        {text}
-      </Link>
+      <Text style={styles.text}>{text}</Text>
     </Pressable>
   );
 };
