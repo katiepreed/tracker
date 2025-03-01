@@ -20,7 +20,7 @@ const Button = ({ text }: Props) => {
         },
       ]}
     >
-      <Text>{text}</Text>
+      <Link href="/contact-form">{text}</Link>
     </Pressable>
   );
 };
