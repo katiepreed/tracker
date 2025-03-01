@@ -4,23 +4,19 @@ import { Pressable, View, StyleSheet, Text, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window"); // Get screen width
 
-type Props = {
-  text: string;
-};
-
-const Button = ({ text }: Props) => {
+const Button = ({ text, href }) => {
   return (
     <Pressable
       style={({ pressed }) => [
         styles.button,
         {
           backgroundColor: pressed
-            ? "rgb(127, 127, 127)"
+            ? "rgb(224, 219, 219)"
             : "rgb(197, 206, 215)",
         },
       ]}
     >
-      <Link href="/contact-form">{text}</Link>
+      <Link href={href}>{text}</Link>
     </Pressable>
   );
 };

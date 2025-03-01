@@ -10,10 +10,8 @@ import Button from "../components/Button";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Button text={"Immediate Contact"} />
-      <Link href="/home-form">
-        <Button text={"Home Address"} />
-      </Link>
+      <Button text={"Immediate Contact"} href="/contact-form" />
+      <Button text={"Home Address"} href="/home-form" />
     </View>
   );
 }
