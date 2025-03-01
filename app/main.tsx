@@ -3,7 +3,7 @@ import { View, StyleSheet, Alert, Text } from "react-native";
 import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Button from "../components/Button";
+import Button from "../components/NavigationButton";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 

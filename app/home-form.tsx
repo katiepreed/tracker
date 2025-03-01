@@ -2,7 +2,8 @@ import { View, StyleSheet, Alert, Text, TextInput } from "react-native";
 import { useState } from "react";
 import FormItem from "../components/FormItem";
 import { Link } from "expo-router";
-import Button from "../components/Button";
+import NavigationButton from "../components/NavigationButton";
+import { setItem } from "../utils/AsyncStorage";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
@@ -13,9 +14,20 @@ export default function HomeForm() {
   const [postCode, setPostCode] = useState("");
   const [country, setCountry] = useState("");
 
+  var isDisabled =
+    houseNumber.trim() === "" ||
+    streetName.trim() === "" ||
+    city.trim() === "" ||
+    postCode.trim() === "" ||
+    country.trim() === "";
+
   // will use this to update the database
   const handleSubmit = () => {
-    // ...
+    setItem("door", houseNumber);
+    setItem("street", streetName);
+    setItem("city", city);
+    setItem("post", postCode);
+    setItem("country", country);
   };
 
   // make sure to add type check and stuff like that to each input form
@@ -52,7 +64,12 @@ export default function HomeForm() {
         onType={setCountry}
       />
 
-      <Button text="Continue" page="main" />
+      <NavigationButton
+        text="Continue"
+        page="main"
+        isDisabled={isDisabled}
+        submit={handleSubmit}
+      />
     </View>
   );
 }

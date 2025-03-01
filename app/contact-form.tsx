@@ -1,8 +1,10 @@
 import { View, StyleSheet, Alert } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormItem from "../components/FormItem";
 import { Link } from "expo-router";
-import Button from "../components/Button";
+import NavigationButton from "../components/NavigationButton";
+import { useNavigation } from "@react-navigation/native";
+import { setItem } from "../utils/AsyncStorage";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
@@ -10,20 +12,13 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
-  // will use this to update the database
-  const handleSubmit = () => {
-    console.log(name);
-    console.log(phone);
+  //  need to update the type for the phone
+  var isDisabled = name.trim() === "" || phone.trim() === "";
 
-    if (!name.trim()) {
-      Alert.alert("Error", "Please enter a valid name");
-      return;
-    }
-    if (!/^[0-9]{10}$/.test(phone)) {
-      Alert.alert("Error", "Please enter a valid 10-digit phone number");
-      return;
-    }
-    Alert.alert("Success", `Name: ${name}\nPhone: ${phone}`);
+  // add real checks to prevent you from entering bad values
+  const handleSubmit = () => {
+    setItem("name", name);
+    setItem("name", phone);
   };
 
   // make sure to add type check and stuff like that to each input form
@@ -41,7 +36,12 @@ export default function ContactForm() {
         value={phone}
         onType={setPhone}
       />
-      <Button text="Continue" page="home-form" />
+      <NavigationButton
+        text="Continue"
+        page="home-form"
+        isDisabled={isDisabled}
+        submit={handleSubmit}
+      />
     </View>
   );
 }
