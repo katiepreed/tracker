@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-evenly",
-    paddingBottom: height * 0.1,
     width: width * 0.4,
   },
   label: {

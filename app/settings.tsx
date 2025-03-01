@@ -22,13 +22,8 @@ export default function MainScreen() {
     }
   };
 
-  useEffect(() => {
-    getStoredValue(); // Fetch value when component mounts
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>This is the main page!</Text>
       <Text>{storedValue}</Text>
     </View>
   );

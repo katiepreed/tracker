@@ -1,19 +1,24 @@
 import { View, StyleSheet, Alert } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import FormItem from "../components/FormItem";
 import { Link } from "expo-router";
 import NavigationButton from "../components/NavigationButton";
 import { useNavigation } from "@react-navigation/native";
 import { setItem } from "../utils/AsyncStorage";
+import PhoneInput from "react-native-phone-number-input";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const phoneInputRef = useRef(null);
 
   //  need to update the type for the phone
-  var isDisabled = name.trim() === "" || phone.trim() === "";
+  var isDisabled =
+    name.trim() === "" || phone.trim() === "" || email.trim() === "";
 
   // add real checks to prevent you from entering bad values
   const handleSubmit = () => {
@@ -30,11 +35,17 @@ export default function ContactForm() {
         onType={setName}
         value={name}
       />
+
+      <PhoneInput
+        defaultCode="GB" // Change default country code as needed
+        layout="first"
+        onChangeText={setPhone}
+      />
       <FormItem
-        label="Phone number:"
-        placeHolderText="Enter your phone number"
-        value={phone}
-        onType={setPhone}
+        label="Email:"
+        placeHolderText="Enter your email"
+        value={email}
+        onType={setEmail}
       />
       <NavigationButton
         text="Continue"
