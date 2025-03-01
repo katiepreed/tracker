@@ -6,12 +6,12 @@ const { width, height } = Dimensions.get("window"); // Get screen width
 
 import { useNavigation } from "@react-navigation/native";
 
-const Button = ({ text, href }) => {
+const Button = ({ text, page }) => {
   const navigation = useNavigation();
 
   return (
     <Pressable
-      onPress={() => navigation.navigate("contact-form")}
+      onPress={() => navigation.navigate(page)}
       style={({ pressed }) => [
         styles.button,
         {

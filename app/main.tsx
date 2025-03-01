@@ -7,11 +7,10 @@ import Button from "../components/Button";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
-export default function HomeScreen() {
+export default function MainScreen() {
   return (
     <View style={styles.container}>
-      <Text>Please continue to fill in some mandatory details!</Text>
-      <Button text={"Continue"} page="contact-form" />
+      <Text>This is the main page!</Text>
     </View>
   );
 }

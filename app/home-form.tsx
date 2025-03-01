@@ -1,7 +1,8 @@
-import { View, StyleSheet, Alert, Text, TextInput, Button } from "react-native";
+import { View, StyleSheet, Alert, Text, TextInput } from "react-native";
 import { useState } from "react";
 import FormItem from "../components/FormItem";
 import { Link } from "expo-router";
+import Button from "../components/Button";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
@@ -50,9 +51,8 @@ export default function HomeForm() {
         value={country}
         onType={setCountry}
       />
-      <Link href="/">
-        <Button title="Submit" onPress={handleSubmit} />
-      </Link>
+
+      <Button text="Continue" page="main" />
     </View>
   );
 }
