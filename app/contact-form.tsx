@@ -18,7 +18,7 @@ export default function ContactForm() {
   // add real checks to prevent you from entering bad values
   const handleSubmit = () => {
     setItem("name", name);
-    setItem("name", phone);
+    setItem("phone", phone);
   };
 
   // make sure to add type check and stuff like that to each input form

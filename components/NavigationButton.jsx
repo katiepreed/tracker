@@ -11,7 +11,7 @@ const Button = ({ text, page, isDisabled, submit }) => {
 
   return (
     <Pressable
-      isDisabled={isDisabled}
+      disabled={isDisabled}
       onPress={() => {
         navigation.replace(page);
         submit(); // test that this works
