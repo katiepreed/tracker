@@ -48,7 +48,7 @@ export default function HomeForm() {
         label="Country:"
         placeHolderText="Enter your country"
         value={country}
-        onType={setStreetName}
+        onType={setCountry}
       />
       <Link href="/">
         <Button title="Submit" onPress={handleSubmit} />

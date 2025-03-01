@@ -16,7 +16,9 @@ const Button = ({ text, href }) => {
         },
       ]}
     >
-      <Link href={href}>{text}</Link>
+      <Link style={styles.text} href={href}>
+        {text}
+      </Link>
     </Pressable>
   );
 };
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     fontSize: 20,
+  },
+  text: {
+    fontSize: 30,
   },
 });
 
