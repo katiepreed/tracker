@@ -1,13 +1,9 @@
 import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
-import { View, StyleSheet, Alert, Dimensions } from "react-native";
-import { useState, useEffect, useRef } from "react";
 import FormItem from "../components/FormItem";
 import NavigationButton from "../components/NavigationButton";
 import { setItem } from "../utils/AsyncStorage";
 import { useFonts } from "expo-font";
-
-// https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -80,11 +76,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "rgb(20, 10, 107)",
-  },
-  inputSize: {
-    width: "80%",
-    marginBottom: 30,
-    fontFamily: "CustomFont",
-    color: "#150f6a",
   },
 });

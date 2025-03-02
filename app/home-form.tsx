@@ -1,10 +1,8 @@
-import { View, StyleSheet, Alert, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
 import FormItem from "../components/FormItem";
 import NavigationButton from "../components/NavigationButton";
 import { setItem } from "../utils/AsyncStorage";
-
-// https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function HomeForm() {
   const [houseNumber, setHouseNumber] = useState("");
@@ -20,7 +18,6 @@ export default function HomeForm() {
     postCode.trim() === "" ||
     country.trim() === "";
 
-  // will use this to update the database
   const handleSubmit = () => {
     setItem("door", houseNumber);
     setItem("street", streetName);
@@ -82,11 +79,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "rgb(20, 10, 107)",
-  },
-  inputSize: {
-    width: "80%",
-    marginBottom: 30,
-    fontFamily: "CustomFont",
-    color: "#150f6a",
   },
 });
