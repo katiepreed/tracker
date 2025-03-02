@@ -16,12 +16,7 @@ export default function SMSButton({ link }) {
   };
   const getStoredValue = async () => {
     const phone = await getItem("phone");
-
-    if (phone !== null) {
-      setPhone(phone);
-    } else {
-      setPhone("");
-    }
+    setPhone(phone);
   };
 
   useEffect(() => {
@@ -54,7 +49,7 @@ const styles = StyleSheet.create({
   text: {
     color: "rgb(255, 255, 255)",
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 33,
     textAlign: "center",
   },
 });

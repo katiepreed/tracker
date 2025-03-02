@@ -1,69 +1,66 @@
+import { View, StyleSheet, Text } from "react-native";
+import { useState } from "react";
 import { View, StyleSheet, Alert, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import FormItem from "../components/FormItem";
-import { Link } from "expo-router";
 import NavigationButton from "../components/NavigationButton";
-import { useNavigation } from "@react-navigation/native";
 import { setItem } from "../utils/AsyncStorage";
-import PhoneInput from "react-native-phone-number-input";
 import { useFonts } from "expo-font";
-
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function ContactForm() {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-
-  useFonts({
-      CustomFont: require("../assets/fonts/nunito.ttf"),
-    });
-  
-
-  const phoneInputRef = useRef(null);
 
   //  need to update the type for the phone
   var isDisabled =
-    name.trim() === "" || phone.trim() === "" || email.trim() === "";
+    firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "";
 
   // add real checks to prevent you from entering bad values
   const handleSubmit = () => {
-    setItem("name", name);
+    setItem("first", firstName);
+    setItem("last", lastName);
     setItem("phone", phone);
   };
+
+  useFonts({
+    CustomFont: require("../assets/fonts/nunito.ttf"),
+  });
 
   // make sure to add type check and stuff like that to each input form
   return (
     <View style={styles.container}>
+      <Text
+        style={[
+          styles.header,
+          { paddingVertical: 10, fontFamily: "CustomFont" },
+        ]}
+      >
+        Please enter name and phone number of emergency contact
+      </Text>
       <FormItem
-        label="Name:"
-        placeHolderText="Enter your full name"
-        onType={setName}
-        value={name}
-        style={styles.inputSize}
+        placeHolderText="First name"
+        onType={setFirstName}
+        value={firstName}
       />
-
       <FormItem
-        label="Email:"
-        placeHolderText="Enter your email"
-        value={email}
-        onType={setEmail}
-        style={styles.inputSize}
+        placeHolderText="Last name"
+        onType={setLastName}
+        value={lastName}
       />
-
-      <PhoneInput
-        defaultCode="GB" // Change default country code as needed
-        layout="first"
-        onChangeText={setPhone}
-        containerStyle={styles.inputSize}
+      <FormItem
+        placeHolderText="Phone Number"
+        value={phone}
+        onType={setPhone}
       />
-
       <NavigationButton
         text="Continue"
         page="home-form"
         isDisabled={isDisabled}
         submit={handleSubmit}
+        darkTheme={true}
       />
     </View>
   );
@@ -71,85 +68,23 @@ export default function ContactForm() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "rgb(208, 224, 255)",
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: '#d4e4fc',
+    justifyContent: "space-evenly",
+    padding: 30,
+  },
+  header: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "rgb(20, 10, 107)",
   },
   inputSize: {
-    width: '80%',
+    width: "80%",
     marginBottom: 30,
-    fontFamily: 'CustomFont',
-    color: '#150f6a',
-  }
+    fontFamily: "CustomFont",
+    color: "#150f6a",
+  },
 });
-
-
-// import { View, StyleSheet, Alert } from "react-native";
-// import { useState, useEffect, useRef } from "react";
-// import FormItem from "../components/FormItem";
-// import { Link } from "expo-router";
-// import NavigationButton from "../components/NavigationButton";
-// import { useNavigation } from "@react-navigation/native";
-// import { setItem } from "../utils/AsyncStorage";
-// import PhoneInput from "react-native-phone-number-input";
-
-// // https://docs.expo.dev/develop/file-based-routing/#_layout-file
-
-// export default function ContactForm() {
-//   const [name, setName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [email, setEmail] = useState("");
-
-//   const phoneInputRef = useRef(null);
-
-//   //  need to update the type for the phone
-//   var isDisabled =
-//     name.trim() === "" || phone.trim() === "" || email.trim() === "";
-
-//   // add real checks to prevent you from entering bad values
-//   const handleSubmit = () => {
-//     setItem("name", name);
-//     setItem("phone", phone);
-//   };
-
-//   // make sure to add type check and stuff like that to each input form
-//   return (
-//     <View style={styles.container}>
-//       <FormItem
-//         label="Name:"
-//         placeHolderText="Enter your full name"
-//         onType={setName}
-//         value={name}
-//       />
-
-//       <PhoneInput
-//         defaultCode="GB" // Change default country code as needed
-//         layout="first"
-//         onChangeText={setPhone}
-//       />
-//       <FormItem
-//         label="Email:"
-//         placeHolderText="Enter your email"
-//         value={email}
-//         onType={setEmail}
-//       />
-//       <NavigationButton
-//         text="Continue"
-//         page="home-form"
-//         isDisabled={isDisabled}
-//         submit={handleSubmit}
-//       />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: "column",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });

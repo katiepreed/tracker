@@ -21,11 +21,11 @@ export default function AddressPage() {
     const postCode = await getItem("post");
     const country = await getItem("country");
 
-    country && setCountry(country);
-    houseNumber && setHouseNumber(houseNumber);
-    streetName && setStreetName(streetName);
-    city && setCity(city);
-    postCode && setPostCode(postCode);
+    setCountry(country);
+    setHouseNumber(houseNumber);
+    setStreetName(streetName);
+    setCity(city);
+    setPostCode(postCode);
   };
 
   useEffect(() => {
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "rgb(20, 10, 107)",
+    padding: 20,
   },
   header: {
     fontSize: 25,

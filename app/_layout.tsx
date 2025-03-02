@@ -13,6 +13,7 @@ export default function RootLayout() {
       <Stack.Screen name="home-form" />
       <Stack.Screen name="main" />
       <Stack.Screen name="address" />
+      <Stack.Screen name="settings" />
     </Stack>
   );
 }

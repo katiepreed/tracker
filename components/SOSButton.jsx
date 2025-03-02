@@ -13,12 +13,7 @@ export default function SosButton() {
 
   const getStoredValue = async () => {
     const phone = await getItem("phone");
-
-    if (phone !== null) {
-      setPhone(phone);
-    } else {
-      setPhone("");
-    }
+    setPhone(phone);
   };
 
   useEffect(() => {
@@ -50,6 +45,6 @@ const styles = StyleSheet.create({
     color: "rgb(255, 255, 255)",
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 25,
+    fontSize: 33,
   },
 });

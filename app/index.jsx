@@ -1,6 +1,9 @@
 import { View, StyleSheet, Text, Image } from "react-native";
 import NavigationButton from "../components/NavigationButton";
 import { useFonts } from "expo-font";
+import { clear, getAllItems } from "../utils/AsyncStorage";
+import { useEffect, useState } from "react";
+import MainScreen from "./main";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
@@ -8,6 +11,25 @@ export default function HomeScreen() {
   useFonts({
     CustomFont: require("../assets/fonts/nunito.ttf"),
   });
+
+  const [keys, setKeys] = useState([]);
+
+  const getStoredValues = async () => {
+    const items = await getAllItems();
+
+    setKeys(Object.keys(items));
+  };
+
+  useEffect(() => {
+    getStoredValues();
+  }, []);
+
+  // opt out of forms for non-first time users
+  /* comment out for demo 
+  if (keys.length > 0) {
+    return <MainScreen />;
+  }
+    */
 
   return (
     <View style={styles.container}>

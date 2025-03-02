@@ -1,16 +1,18 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Pressable } from "react-native";
 import { useEffect, useState } from "react";
 import AddressButton from "../components/AddressButton";
 import SosButton from "../components/SOSButton";
 import SMSButton from "../components/SMSButton";
 import * as Location from "expo-location";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MainScreen() {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [link, setLink] = useState(null);
+  const navigation = useNavigation();
 
   async function getCurrentLocation() {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -42,13 +44,16 @@ export default function MainScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContaner}>
+      <Pressable
+        style={styles.imageContaner}
+        onPress={() => navigation.navigate("settings")}
+      >
         <Image
           style={styles.image}
           source={require("../assets/images/settings.png")}
           resizeMode="contain"
         />
-      </View>
+      </Pressable>
       <AddressButton />
       <SosButton />
       <SMSButton link={link} />
