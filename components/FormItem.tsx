@@ -1,30 +1,22 @@
 import {
-  View,
   StyleSheet,
-  Alert,
-  Text,
   TextInput,
-  Button,
-  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
-const { width, height } = Dimensions.get("window"); // Get screen width
 
 type Props = {
-  label: string;
   placeHolderText: string;
   onType: (param: string) => void;
   value: string;
 };
 
-export default function FormItem({
-  label,
-  placeHolderText,
-  onType,
-  value,
-}: Props) {
+export default function FormItem({ placeHolderText, onType, value }: Props) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
       <TextInput
         style={styles.input}
         placeholder={placeHolderText}
@@ -32,7 +24,7 @@ export default function FormItem({
         onChangeText={onType}
         placeholderTextColor="gray"
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -41,7 +33,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-evenly",
-    width: width * 0.4,
   },
   label: {
     paddingTop: 10,
@@ -51,9 +42,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   input: {
-    padding: 10,
+    padding: 15,
     borderWidth: 1,
-    width: width * 0.25,
     backgroundColor: "white",
+    borderRadius: 20,
+    width: 200,
+    borderColor: "rgb(20, 10, 107)",
   },
 });

@@ -1,47 +1,65 @@
-import { useState } from "react";
-import { Link, RelativePathString } from "expo-router";
-import { Pressable, View, StyleSheet, Text, Dimensions } from "react-native";
-
-const { width, height } = Dimensions.get("window"); // Get screen width
-
+import { Pressable, Alert, StyleSheet, Text } from "react-native";
+import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 
-const Button = ({ text, page, isDisabled, submit }) => {
+const Button = ({ text, page, isDisabled, submit, darkTheme }) => {
   const navigation = useNavigation();
+
+  useFonts({
+    CustomFont: require("../assets/fonts/nunito.ttf"),
+  });
+
+  const showAlert = () => {
+    Alert.alert("Error", "Please fill in all the inputs!");
+  };
 
   return (
     <Pressable
-      disabled={isDisabled}
       onPress={() => {
-        navigation.replace(page);
-        submit(); // test that this works
+        if (isDisabled) {
+          showAlert();
+        } else {
+          submit();
+          navigation.replace(page);
+        }
       }}
-      style={({ pressed }) => [
+      style={[
         styles.button,
         {
-          backgroundColor: pressed
-            ? "rgb(224, 219, 219)"
-            : "rgb(197, 206, 215)",
+          backgroundColor: darkTheme
+            ? "rgb(20, 10, 107)"
+            : "rgb(255, 255, 255)",
         },
       ]}
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text
+        style={[
+          styles.text,
+          {
+            fontFamily: "CustomFont",
+            color: darkTheme ? "rgb(255, 255, 255)" : "rgb(20, 10, 107)",
+          },
+        ]}
+      >
+        {text}
+      </Text>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    width: width * 0.5,
-    height: height * 0.15,
-    borderRadius: 25,
+    width: "60%",
+    height: "8%",
+    borderRadius: 30,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 20,
+    maxWidth: 400,
   },
   text: {
-    fontSize: 30,
+    fontSize: 20,
+    color: "rgb(20, 10, 107)",
   },
 });
 

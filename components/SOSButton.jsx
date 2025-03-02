@@ -1,41 +1,55 @@
 import * as Linking from "expo-linking";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Pressable,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
+import { useFonts } from "expo-font";
+import { useEffect, useState } from "react";
+import { getItem } from "@/utils/AsyncStorage";
 
-const { width, height } = Dimensions.get("window");
+export default function SosButton() {
+  useFonts({
+    CustomFont: require("../assets/fonts/nunito.ttf"),
+  });
 
-export default function SosButton({ phoneNum }) {
+  const [phone, setPhone] = useState("");
+
+  const getStoredValue = async () => {
+    const phone = await getItem("phone");
+
+    if (phone !== null) {
+      setPhone(phone);
+    } else {
+      setPhone("");
+    }
+  };
+
+  useEffect(() => {
+    getStoredValue(); // Fetch value when component mounts
+  }, []);
+
   return (
     <Pressable
-      onPress={() => Linking.openURL(`tel:${phoneNum}`)}
+      onPress={() => Linking.openURL(`tel:${phone}`)}
       style={styles.button}
     >
-      <Text style={{ color: "#000000" }}>SOS</Text>
+      <Text style={[styles.text, { fontFamily: "CustomFont" }]}>
+        Call Emergency Contact
+      </Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#ff0000",
-    display: "flex",
+    backgroundColor: "rgb(201, 26, 67)",
+    width: "80%",
+    height: "25%",
+    borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 20,
-    width: width * 0.3,
-    height: width * 0.3,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "black",
-    shadowColor: "black",
-    shadowOpacity: 1,
-    zIndex: 10,
-    alignSelf: "center",
+  },
+  text: {
+    color: "rgb(255, 255, 255)",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 25,
   },
 });

@@ -1,43 +1,60 @@
 import { Linking } from "react-native";
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Pressable,
-  Dimensions,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 import * as SMS from "expo-sms";
-
-const { width, height } = Dimensions.get("window");
+import { useFonts } from "expo-font";
+import { useEffect, useState } from "react";
+import { getItem } from "@/utils/AsyncStorage";
 
 export default function SMSButton({ link }) {
+  const [phone, setPhone] = useState("");
+
   const sendSMS = async () => {
     await SMS.sendSMSAsync(
-      ["+447477960816"], // Recipient phone number(s)
+      [phone], // Recipient phone number(s)
       `Hello! I am lost, please find me at this location: ${link}` // Message text
     );
   };
+  const getStoredValue = async () => {
+    const phone = await getItem("phone");
 
-  return <Button title="Send SMS" onPress={sendSMS} />;
+    if (phone !== null) {
+      setPhone(phone);
+    } else {
+      setPhone("");
+    }
+  };
+
+  useEffect(() => {
+    getStoredValue();
+  }, []);
+
+  useFonts({
+    CustomFont: require("../assets/fonts/nunito.ttf"),
+  });
+
+  return (
+    <Pressable style={styles.button} onPress={sendSMS}>
+      <Text style={[styles.text, { fontFamily: "CustomFont" }]}>
+        Text Current Location
+      </Text>
+    </Pressable>
+  );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#ff0000",
-    display: "flex",
+    backgroundColor: "rgb(30, 20, 135)",
+    width: "80%",
+    height: "25%",
+    borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 20,
-    width: width * 0.3,
-    height: width * 0.3,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "black",
-    shadowColor: "black",
-    shadowOpacity: 1,
-    zIndex: 10,
-    alignSelf: "center",
+    padding: 10,
+  },
+  text: {
+    color: "rgb(255, 255, 255)",
+    fontWeight: "bold",
+    fontSize: 25,
+    textAlign: "center",
   },
 });

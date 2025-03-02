@@ -1,32 +1,73 @@
-import { Link } from "expo-router";
-import { View, StyleSheet, Alert, Text } from "react-native";
-import { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, StyleSheet, Text, Image } from "react-native";
 import NavigationButton from "../components/NavigationButton";
+import { useFonts } from "expo-font";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function HomeScreen() {
+  useFonts({
+    CustomFont: require("../assets/fonts/nunito.ttf"),
+  });
+
   return (
     <View style={styles.container}>
-      <Text>Please continue to fill in some mandatory details!</Text>
+      <View>
+        <Text
+          style={[styles.header, { fontFamily: "CustomFont", fontSize: 40 }]}
+        >
+          Hello!
+        </Text>
+        <Text
+          style={[
+            styles.header,
+            { paddingVertical: 10, fontFamily: "CustomFont" },
+          ]}
+        >
+          Welcome to WanderSafe
+        </Text>
+      </View>
+      <Image
+        style={styles.image}
+        source={require("../assets/images/happiness.png")}
+        resizeMode="contain"
+      />
+      <Text style={[styles.text, { fontFamily: "CustomFont", maxWidth: 400 }]}>
+        At WanderSafe, we understand the challenges faced by individuals living
+        with dementia and their caregivers. Wandering and disorientation can be
+        distressing, but with WanderSafe, you can have peace of mind knowing
+        that help is always available.
+      </Text>
       <NavigationButton
         text={"Continue"}
         page="contact-form"
         isDisabled={false}
         submit={() => {}}
+        darkTheme={false}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  image: {
+    height: "40%",
+  },
   container: {
+    backgroundColor: "rgb(208, 224, 255)",
     flex: 1,
-    backgroundColor: "rgb(255, 255, 255)",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
+    padding: 30,
+  },
+  header: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "rgb(20, 10, 107)",
+  },
+  text: {
+    color: "rgb(20, 10, 107)",
+    fontSize: 15,
+    textAlign: "justify",
   },
 });

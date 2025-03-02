@@ -1,19 +1,10 @@
-import { Link } from "expo-router";
 import React from "react";
-import { View, StyleSheet, Alert, Button } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { getItem } from "../utils/AsyncStorage";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import SendSMS from "react-native-sms";
+import AddressButton from "../components/AddressButton";
 import SosButton from "../components/SOSButton";
 import SMSButton from "../components/SMSButton";
-
-import * as Device from "expo-device";
 import * as Location from "expo-location";
-
-import axios from "axios";
 
 export default function MainScreen() {
   const [location, setLocation] = useState(null);
@@ -51,7 +42,15 @@ export default function MainScreen() {
 
   return (
     <View style={styles.container}>
-      <SosButton phoneNum={"+447749892466"} />
+      <View style={styles.imageContaner}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/settings.png")}
+          resizeMode="contain"
+        />
+      </View>
+      <AddressButton />
+      <SosButton />
       <SMSButton link={link} />
     </View>
   );
@@ -59,10 +58,21 @@ export default function MainScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "rgb(255, 255, 255)",
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  imageContaner: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+
+    paddingInline: 30,
+  },
+  image: {
+    height: 30,
+    width: 30,
   },
 });
