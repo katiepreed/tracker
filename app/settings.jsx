@@ -1,11 +1,22 @@
-import { View, StyleSheet, Text, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  ScrollView,
+  EventEmitter,
+} from "react-native";
 import { useEffect, useState } from "react";
 import { getAllItems, getItem, setItem } from "../utils/AsyncStorage";
 import { useFonts } from "expo-font";
+import NavigationButton from "../components/NavigationButton";
+import { useNavigation } from "@react-navigation/native";
 
 // https://docs.expo.dev/develop/file-based-routing/#_layout-file
 
 export default function MainScreen() {
+  const navigation = useNavigation();
+
   const [keys, setKeys] = useState([""]);
   const [values, setValues] = useState([""]);
 
@@ -76,6 +87,16 @@ export default function MainScreen() {
           );
         })}
       </ScrollView>
+      <View style={{ height: 50 }} />
+      <NavigationButton
+        text={"Return"}
+        page="main"
+        isDisabled={false}
+        submit={() => {
+          navigation.goBack();
+        }}
+        darkTheme={true}
+      />
     </View>
   );
 }

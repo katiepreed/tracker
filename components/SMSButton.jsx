@@ -1,4 +1,3 @@
-import { Linking } from "react-native";
 import { StyleSheet, Text, Pressable } from "react-native";
 import * as SMS from "expo-sms";
 import { useFonts } from "expo-font";

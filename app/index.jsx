@@ -12,6 +12,7 @@ export default function HomeScreen() {
     CustomFont: require("../assets/fonts/nunito.ttf"),
   });
 
+  /* comment out for demo 
   const [keys, setKeys] = useState([]);
 
   const getStoredValues = async () => {
@@ -25,7 +26,6 @@ export default function HomeScreen() {
   }, []);
 
   // opt out of forms for non-first time users
-  /* comment out for demo 
   if (keys.length > 0) {
     return <MainScreen />;
   }
